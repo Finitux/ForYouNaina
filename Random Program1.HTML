@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Would you go out with me?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffd4e5; /* pink-ish background */
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative; /* added position relative */
+        }
+        .cute-animal {
+            width: 200px;
+            height: 200px;
+            background-image: url('cute-animal.jpg'); /* Replace 'cute-animal.jpg' with your cute animal image */
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            position: relative; /* added position relative */
+        }
+        button:focus {
+            outline: none;
+        }
+        #no-button {
+            background-color: #ffc0cb; /* Light pink */
+        }
+        #yes-button {
+            background-color: #90ee90; /* Light green */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cute-animal"></div>
+        <div class="question">Would you go out with me If I asked politely?</div>
+        <div class="buttons">
+            <button id="yes-button" onclick="goToThankYouPage()">Yes</button>
+            <button id="no-button" onclick="teleport()">No</button>
+        </div>
+    </div>
+
+    <script>
+        var clickCount = 0;
+
+        function goToThankYouPage() {
+            window.location.href = "thank_you_page.html"; // Replace "thank_you_page.html" with the URL of your thank you page
+        }
+
+        function teleport() {
+            clickCount++;
+            var noButton = document.getElementById("no-button");
+            var container = document.querySelector(".container");
+            var rect = container.getBoundingClientRect();
+            var x, y;
+
+            if (clickCount <= 5) {
+                // Move the button near the text and image
+                x = rect.width / 2 - noButton.offsetWidth / 2;
+                y = container.offsetTop + container.offsetHeight + 20;
+            } else {
+                // If clicked more than 5 times, do nothing
+                alert("Am I that bad??");
+                return;
+            }
+
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
